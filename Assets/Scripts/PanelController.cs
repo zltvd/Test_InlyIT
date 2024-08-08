@@ -14,11 +14,11 @@ public class PanelController : MonoBehaviour
         ButtonController._borderComponent = new DefaultBorderComponent(ButtonController._startThickness);
     }
 
-    public void CreatePanel(int i)
+    public void CreatePanel(int i, Player player)
     {
-        GameObject panel = Instantiate(ButtonController.panels[i], GameObject.Find("Canvas").transform.position, GameObject.Find("Canvas").transform.rotation);
-        panel.transform.SetParent(GameObject.Find("Canvas").transform);
-        WindowController.Attach(panel.gameObject.GetComponent<IObserver>());
-        WindowController.Notify(i);
+        GameObject panel = Instantiate(ButtonController.panels[i], player.Canvas.transform.position, player.Canvas.transform.rotation);
+        panel.transform.SetParent(player.Canvas.transform);
+        WindowController.Attach(panel.gameObject.GetComponent<window>());
+        WindowController.Notify(i, player);
     }
 }

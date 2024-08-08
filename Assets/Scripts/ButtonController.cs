@@ -5,58 +5,6 @@ using UnityEngine.Assertions.Comparers;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
-public class Global
-{
-    public static int numScene = 0;
-    public static int numLastOpenedWindow;
-    public static int numNowOpenWindow;
-}
-
-
-public abstract class BorderComponent
-{
-    public abstract float GetBorder();
-}
-
-public class DefaultBorderComponent : BorderComponent
-{
-    protected float _border;
-    public DefaultBorderComponent(float border)
-    {
-        _border = border;
-    }
-    public override float GetBorder()
-    {
-        return _border;
-    }
-}
-
-public class BorderDecorator : BorderComponent
-{
-    protected BorderComponent _component;
-    public BorderDecorator(BorderComponent component)
-    {
-        _component = component;
-    }
-    public override float GetBorder()
-    {
-        return _component.GetBorder();
-    }
-}
-
-public class AddThicknessDecorator : BorderDecorator
-{
-    protected float _addThickness;
-    public AddThicknessDecorator(BorderComponent component, float addborder) : base(component)
-    {
-        _addThickness = addborder;
-    }
-    public override float GetBorder()
-    {
-        return _addThickness + _component.GetBorder();
-    }
-}
-
 public class ButtonController : MonoBehaviour
 {
     public float _startThickness;

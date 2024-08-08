@@ -3,31 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WindowController : MonoBehaviour, ISubject
+public class WindowController : MonoBehaviour
 {
-    public List<IObserver> _observers = new List<IObserver>();
-    public void Attach(IObserver observer)
+    public event Action<int, Player> OpenWindow;
+    public void Attach(window window)
     {
-        if (!_observers.Contains(observer))
-        {
-            _observers.Add(observer);
-        }
+        OpenWindow += window.OpenWindow;
     }
-    public void Detach(IObserver observer)
+    public void Notify(int i, Player player)
     {
-        if (_observers.Contains(observer))
+        if (OpenWindow != null)
         {
-            _observers.Remove(observer);
-        }
-    }
-    public void Notify(int i)
-    {
-        foreach (var observer in _observers)
-        {
-            if (observer != null)
-            {
-                observer.OpenWindow(i);
-            }
+            OpenWindow(i, player);
         }
     }
 }
